@@ -1,0 +1,16 @@
+a {
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+.font-ns {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.font-rs {
+    font-family: 'Roboto Slab', sans-serif;
+}
