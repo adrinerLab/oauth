@@ -25,6 +25,7 @@ class XboxAuthentication implements MinecraftAuthentication {
     protected string $xbox_security_token;
     protected string $uhs_token;
     protected string $minecraft_access_token;
+    protected null|array $user_profile = null;
 
     public function getConsentScreen(): RedirectResponse
     {
@@ -46,14 +47,20 @@ class XboxAuthentication implements MinecraftAuthentication {
         $this->getXboxLiveToken();
         $this->getXboxSecurityToken();
         $this->getMinecraftToken();
+        $this->getMinecraftUserProfile();
     }
 
     public function isPremiumUser(): bool
     {
-        if (!$this->getMinecraftUserProfile()) {
+        if (is_null($this->user_profile)) {
             return false;
         }
         return true;
+    }
+
+    public function getUserUUID(): string
+    {
+        return $this->user_profile['id'];
     }
 
     private function getMicrosoftAccessToken(Request $request): void
@@ -110,16 +117,14 @@ class XboxAuthentication implements MinecraftAuthentication {
         $this->minecraft_access_token = $response['access_token'];
     }
 
-    private function getMinecraftUserProfile(): bool|array
+    private function getMinecraftUserProfile(): void
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->minecraft_access_token
         ])->post($this->endpoints['mcft-user']);
 
-        if ($response->failed()) {
-            return false;
+        if (!$response->failed()) {
+            $this->user_profile = $response->json();
         }
-
-        return $response->json();
     }
 }

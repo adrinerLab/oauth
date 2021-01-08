@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Minecraft;
 
 use App\Http\Controllers\Controller;
+use App\Models\MinecraftVerify;
 use App\Services\Minecraft\XboxAuthentication;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MicrosoftController extends Controller {
     protected XboxAuthentication $minecraftAuthentication;
@@ -24,6 +26,18 @@ class MicrosoftController extends Controller {
     {
         $this->minecraftAuthentication->handleConsentResult($request);
 
-        return $this->minecraftAuthentication->isPremiumUser() ? '정품입니다' : '비정품입니다';
+        $user = Auth::user();
+
+        if (!$this->minecraftAuthentication->isPremiumUser()) {
+            return view('minecraft.not-premium', compact('user'));
+        }
+
+        $verified = MinecraftVerify::create([
+            'user_id' => $user->id,
+            'uuid' => $this->minecraftAuthentication->getUserUUID(),
+            'auth_type' => 'microsoft',
+        ]);
+
+        return view('minecraft.verified', compact('user', 'verified'));
     }
 }

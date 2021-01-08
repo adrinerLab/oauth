@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Minecraft;
 
 use App\Http\Controllers\Controller;
+use App\Models\MinecraftVerify;
 use App\Services\Minecraft\MojangAuthentication;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MojangController extends Controller {
     protected MojangAuthentication $minecraftAuthentication;
@@ -34,6 +36,17 @@ class MojangController extends Controller {
             return back()->with('error', true);
         }
 
-        return $this->minecraftAuthentication->isPremiumUser() ? '정품입니다' : '비정품입니다';
+        $user = Auth::user();
+
+        if (!$this->minecraftAuthentication->isPremiumUser()) {
+            return view('minecraft.not-premium', compact('user'));
+        }
+
+        $verified = MinecraftVerify::create([
+            'user_id' => $user->id,
+            'auth_type' => 'mojang',
+        ]);
+
+        return view('minecraft.verified', compact('user', 'verified'));
     }
 }
