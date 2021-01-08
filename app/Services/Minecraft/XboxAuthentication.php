@@ -30,7 +30,6 @@ class XboxAuthentication implements MinecraftAuthentication {
     {
         $query_string = http_build_query([
             'client_id' => env('MICROSOFT_OAUTH_ID'),
-            'client_secret' => env('MICROSOFT_OAUTH_KEY'),
             'redirect_uri' => env('MICROSOFT_REDIRECT_URI'),
             'scope' => 'XboxLive.signin offline_access',
             'response_type' => 'code',
