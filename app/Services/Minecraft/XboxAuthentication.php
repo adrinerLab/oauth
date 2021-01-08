@@ -26,7 +26,7 @@ class XboxAuthentication implements MinecraftAuthentication {
     protected string $uhs_token;
     protected string $minecraft_access_token;
 
-    public function redirectToConsentScreen(): RedirectResponse
+    public function getConsentScreen(): RedirectResponse
     {
         $query_string = http_build_query([
             'client_id' => env('MICROSOFT_OAUTH_ID'),

@@ -10,17 +10,18 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 
 class MojangAuthentication implements MinecraftAuthentication {
-
-    protected string $username, $password;
-
     protected array $responseData;
 
     protected string $endpoint = 'https://authserver.mojang.com/authenticate';
 
-    public function __construct(string $username, string $password)
+    public function getConsentScreen(): RedirectResponse
     {
-        $this->username = $username;
-        $this->password = $password;
+        // TODO: Implement redirectToConsentScreen() method.
+    }
+
+    public function handleConsentResult(Request $request): void
+    {
+        // TODO: Implement handleConsentResult() method.
     }
 
     public function setUserInformation() : bool
@@ -50,15 +51,5 @@ class MojangAuthentication implements MinecraftAuthentication {
         }
 
         return true;
-    }
-
-    public function redirectToConsentScreen(): RedirectResponse
-    {
-        // TODO: Implement redirectToConsentScreen() method.
-    }
-
-    public function handleConsentResult(Request $request): void
-    {
-        // TODO: Implement handleConsentResult() method.
     }
 }

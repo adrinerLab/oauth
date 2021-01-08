@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 interface MinecraftAuthentication
 {
-    public function redirectToConsentScreen() : RedirectResponse;
+    public function getConsentScreen() : RedirectResponse;
 
     public function handleConsentResult(Request $request) : void;
 
