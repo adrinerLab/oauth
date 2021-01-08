@@ -4,6 +4,8 @@
 namespace App\Services\Minecraft;
 
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 
@@ -48,5 +50,15 @@ class MojangAuthentication implements MinecraftAuthentication {
         }
 
         return true;
+    }
+
+    public function redirectToConsentScreen(): RedirectResponse
+    {
+        // TODO: Implement redirectToConsentScreen() method.
+    }
+
+    public function handleConsentResult(Request $request): void
+    {
+        // TODO: Implement handleConsentResult() method.
     }
 }
