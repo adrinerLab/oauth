@@ -12,35 +12,36 @@ use Illuminate\Support\Facades\Http;
 class MojangAuthentication implements MinecraftAuthentication {
     protected array $responseData;
 
+    public bool $valid = true;
+
     protected string $endpoint = 'https://authserver.mojang.com/authenticate';
 
     public function getConsentScreen(): RedirectResponse
     {
-        // TODO: Implement redirectToConsentScreen() method.
+        //
     }
 
     public function handleConsentResult(Request $request): void
     {
-        // TODO: Implement handleConsentResult() method.
+        $this->setUserInformation($request->get('username'), $request->get('password'));
     }
 
-    public function setUserInformation() : bool
+    private function setUserInformation($username, $password) : bool
     {
-        $response = Http::get($this->endpoint, [
+        $response = Http::post($this->endpoint, [
             'agent' => [
                 'name' => 'Minecraft',
                 'version' => 13,
             ],
-            'username' => $this->username,
-            'password' => $this->password,
+            'username' => $username,
+            'password' => $password,
         ]);
 
         if ($response->failed()) {
-            return false;
+            return $this->valid = false;
         }
 
         $this->responseData = $response->json();
-
         return true;
     }
 
