@@ -2,12 +2,14 @@
 
 @import '~bootstrap/scss/bootstrap';
 @import '~sweetalert2/src/sweetalert2';
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;500;900&family=Roboto+Slab:wght@100;400;500;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;500;900&family=Roboto:wght@100;400;500;900&display=swap');
 
 @import 'global';
 
 // Components
 @import 'components/card';
+@import 'components/navbar';
+@import 'components/hero';
 
 // Pages
 @import 'pages/auth';

@@ -1,0 +1,26 @@
+.navbar {
+    transition: .5s ease-out;
+
+    &.on-top {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(30px) saturate(150%);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        padding: 1rem 0;
+    }
+
+    &.on-scroll {
+        background: rgba(255, 255, 255, 1);
+        backdrop-filter: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    }
+
+    .navbar-brand {
+        font-weight: 500;
+        img {
+            filter: invert(1);
+            margin-top: -0.2rem;
+            height: 1.1rem;
+            margin-right: 0.2rem;
+        }
+    }
+}

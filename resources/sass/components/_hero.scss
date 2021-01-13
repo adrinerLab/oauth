@@ -1,0 +1,17 @@
+.hero {
+    background: url('/images/hero.jpg') center center no-repeat;
+    background-size: cover;
+    box-shadow: 0 0 15px -5px #000000;
+    padding: 10rem 0 2rem 0;
+    margin-bottom: 1rem;
+    h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    p {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin: 0;
+    }
+}
