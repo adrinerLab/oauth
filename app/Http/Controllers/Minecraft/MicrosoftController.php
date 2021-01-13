@@ -22,7 +22,7 @@ class MicrosoftController extends Controller {
         return $this->minecraftAuthentication->getConsentScreen();
     }
 
-    public function handleProviderCallback(Request $request): string
+    public function handleProviderCallback(Request $request): mixed
     {
         $this->minecraftAuthentication->handleConsentResult($request);
 
