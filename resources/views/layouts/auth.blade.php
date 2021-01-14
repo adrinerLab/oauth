@@ -15,7 +15,6 @@
         <div class="logo">
             <a href="{{ route('home') }}">
                 <img src="{{ asset('/images/logo.png') }}" alt="adrinerLab Logo">
-                <h1 class="service-name">인증센터</h1>
             </a>
         </div>
         <div class="card">
